@@ -110,7 +110,7 @@
                                                 <p class="text-xs text-secondary mb-0">Intellregent</p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <p class="text-xs text-secondary mb-0">0203335610</p>
+                                                <p class="text-xs text-secondary mb-0">0203335612</p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-xs text-secondary mb-0">INC0889757</p>

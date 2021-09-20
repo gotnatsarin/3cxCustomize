@@ -1,13 +1,4 @@
 
-<?php 
-    session_start();
-    include 'connect.php';
-
-    $sql = "SELECT * FROM satisfaction";
-    $result = $connect->query($sql);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,7 +81,7 @@
                                     <thead>
                                         <tr>
                                             <th class="text-uppercase  text-xs font-weight-bold mb-0 opacity-10">Date/Time</th>
-                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Cumtomer No.</th>
+                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Customer No.</th>
                                             <th class="text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Service Name</th>
                                             <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Agent Name</th>                                            
                                             <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Agent ID</th>
@@ -98,16 +89,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php while($row = $result->fetch_assoc()): ?>
                                             <tr>
-                                                <td><?php echo $row['datetime']; ?></td>
-                                                <td align="center"><?php echo $row['customernumber'];?></td>
-                                                <td><?php echo $row['servicename']; ?></td>
-                                                <td align="center"><?php echo $row['agentname']; ?></td>
-                                                <td align="center"><?php echo $row['agentid']; ?></td>
-                                                <td align="center"><?php echo $row['question']; ?></td>
+                                                <td>0</td>
+                                                <td align="center">1</td>
+                                                <td>2</td>
+                                                <td align="center">3</td>
+                                                <td align="center">4</td>
+                                                <td align="center">5></td>
                                             </tr>
-                                        <?php endwhile ?>
                                     </tbody>
                                 </table>
                             </div>

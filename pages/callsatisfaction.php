@@ -59,7 +59,7 @@
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
                                 <span class="d-sm-inline d-none"></span>
-                                <a class="nav-link  " href="../pages/sign-in.php">Sing In</a>
+                                <a class="nav-link  " href="../pages/sign-in.php">Sign In</a>
                             </a>
                         </li>
                     </ul>

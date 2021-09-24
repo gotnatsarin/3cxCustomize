@@ -17,6 +17,7 @@ while($row = pg_fetch_assoc($result)){
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="../assets/img/3cxcustom.png">
+
 <title>
     3CX Customize Call Recorder Report
 </title>
@@ -30,6 +31,12 @@ while($row = pg_fetch_assoc($result)){
 <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
 <!-- CSS Files -->
 <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+  audio{
+    height: 40px;
+  }
+</style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -45,24 +52,29 @@ while($row = pg_fetch_assoc($result)){
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+                        <li class="breadcrumb-item text-sm text-dark active"">Pages</li>
                         <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Call Recorder Report</li>
                     </ol>
                     <h6 class="font-weight-bolder mb-0">Call Recorder Report</h6>
                 </nav>
+
+                <!-- search -->
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         <div class="input-group">
                             <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="Type here...">
+                            <input type="text" class="form-control" name="search" id="search" placeholder="Type here...">
                         </div>
                     </div>
+
+                <!-- End search -->
+
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
                                 <span class="d-sm-inline d-none"></span>
-                                <a class="nav-link  " href="../pages/sign-in.php">Sing In</a>
+                                <a class="nav-link  " href="../pages/sign-in.php">Sign In</a>
                             </a>
                         </li>
                     </ul>
@@ -83,49 +95,14 @@ while($row = pg_fetch_assoc($result)){
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                           <tr>
-                                              <th class="text-uppercase  text-xs font-weight-bold mb-0 opacity-10">#</th>
+                                              <th class="text-center  text-xs font-weight-bold mb-0 opacity-10">#</th>
                                               <th class="text-center  text-xs font-weight-bold mb-0 opacity-10 ps-2">cl_participants_id</th>
                                               <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">start_time</th>
                                               <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">end_time</th>
                                             <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">recording_url</th>
                                           </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php
-                                          for ($i = 0; $i <= count(json_decode($jsonobj)) - 1; $i++) {
-                                            // echo $arr2[$i]['recording_url'].'<br>';
-                                        ?>
-
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1"></div>
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-xs text-center mb-0"><?php echo $i+1; ?></p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs text-center mb-0"><?php echo $arr2[$i]['cl_participants_id']; ?></p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <p class="text-xs text-secondary mb-0"><?php echo $arr2[$i]['start_time']; ?></p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <p class="text-xs text-secondary mb-0"><?php echo $arr2[$i]['end_time']; ?></p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <p class="text-xs text-secondary mb-0">
-                                                  <audio controls>
-                                                  <source src="../data/recording/<?php echo $arr2[$i]['recording_url']; ?>" type="audio/wav">
-                                                  Your browser does not support the audio element.
-                                                  </audio>
-                                                </p>
-                                            </td>
-                                        </tr>
-
-                                        <?php 
-                                          }
-                                        ?>
+                                    <tbody id="output">
 
                                     </tbody>
                                 </table>
@@ -151,217 +128,6 @@ while($row = pg_fetch_assoc($result)){
             </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
-                            <!--    <table class="table align-items-center justify-content-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Budget</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2">
-                                                    <div>
-                                                        <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
-                                                    </div>
-                                                    <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">Spotify</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">$2,500</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">working</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    <span class="me-2 text-xs font-weight-bold">60%</span>
-                                                    <div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2">
-                                                    <div>
-                                                        <img src="../assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
-                                                    </div>
-                                                    <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">Invision</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">$5,000</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">done</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    <span class="me-2 text-xs font-weight-bold">100%</span>
-                                                    <div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2">
-                                                    <div>
-                                                        <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm rounded-circle me-2" alt="jira">
-                                                    </div>
-                                                    <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">Jira</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">$3,400</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">canceled</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    <span class="me-2 text-xs font-weight-bold">30%</span>
-                                                    <div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30" style="width: 30%;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2">
-                                                    <div>
-                                                        <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2" alt="slack">
-                                                    </div>
-                                                    <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">Slack</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">$1,000</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">canceled</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    <span class="me-2 text-xs font-weight-bold">0%</span>
-                                                    <div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0" style="width: 0%;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2">
-                                                    <div>
-                                                        <img src="../assets/img/small-logos/logo-webdev.svg" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
-                                                    </div>
-                                                    <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">Webdev</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">$14,000</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">working</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    <span class="me-2 text-xs font-weight-bold">80%</span>
-                                                    <div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="80" style="width: 80%;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2">
-                                                    <div>
-                                                        <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm rounded-circle me-2" alt="xd">
-                                                    </div>
-                                                    <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">Adobe XD</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">$2,300</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">done</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    <span class="me-2 text-xs font-weight-bold">100%</span>
-                                                    <div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table> -->
                             </div>
                         </div>
                     </div>
@@ -370,7 +136,6 @@ while($row = pg_fetch_assoc($result)){
             <?php 
                 include 'footer.php'
             ?>
-
         </div> <br>
     </main>
      <!--   Core JS Files   -->
@@ -482,8 +247,8 @@ while($row = pg_fetch_assoc($result)){
                 },
             },
         });
-    </script>
-    <script>
+
+        
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
             var options = {
@@ -491,7 +256,35 @@ while($row = pg_fetch_assoc($result)){
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-    </script>
+
+    $(document).ready(function() {
+      $.ajax({
+          type: 'GET',
+          url: 'ajax/getData_callrecord.php',
+          data: {
+            search: $("#search").val(),
+          },
+          success: function(data) {
+            $("#output").html(data)
+          }
+        })
+      });
+
+      $("#search").keyup(function() {
+        $.ajax({
+          type: 'GET',
+          url: 'ajax/getData_callrecord.php',
+          data: {
+            search: $("#search").val(),
+          },
+          success: function(data) {
+            $("#output").html(data)
+          }
+        })
+      });
+ 
+  </script>
+  
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

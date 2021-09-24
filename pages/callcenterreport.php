@@ -34,8 +34,8 @@
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
-</head>
 
+</head>
 <body class="g-sidenav-show  bg-gray-100">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <hr class="horizontal dark mt-0">
@@ -66,7 +66,7 @@
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
                                 <span class="d-sm-inline d-none"></span>
-                                <a class="nav-link  " href="../pages/sign-in.php">Sing In</a>
+                                <a class="nav-link  " href="../pages/sign-in.php">Sign In</a>
                             </a>
                         </li>
                     </ul>

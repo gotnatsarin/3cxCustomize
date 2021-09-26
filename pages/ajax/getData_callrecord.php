@@ -40,4 +40,6 @@
           </tr>";
               $count+=1;
   }
+  pg_free_result($result);
+  pg_close($conn);
 ?>

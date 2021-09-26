@@ -1,13 +1,14 @@
 <?php 
-include("connect.php");
-$result = pg_query($conn, "SELECT * FROM recordings");
+include('connect.php');
+include('session/session.php');
+// $result = pg_query($conn, "SELECT * FROM recordings");
 
-while($row = pg_fetch_assoc($result)){
-    $myArray[]=$row;
-  }
+// while($row = pg_fetch_assoc($result)){
+//     $myArray[]=$row;
+//   }
   
- $jsonobj = json_encode($myArray,JSON_UNESCAPED_UNICODE);
- $arr2 = json_decode($jsonobj,true);
+//  $jsonobj = json_encode($myArray,JSON_UNESCAPED_UNICODE);
+//  $arr2 = json_decode($jsonobj,true);
  
 ?>
 <!DOCTYPE html>
@@ -116,7 +117,7 @@ while($row = pg_fetch_assoc($result)){
                 <div class="col-lg-10 mb-lg-0 mb-4">
                     <div class="card z-index-2">
                         <div class="card-body p-3">
-                            <h6>Garph </h6>
+                            <h6>Graph</h6>
                         </div>
                         <div class="card-body p-3">
                             <div class="chart">

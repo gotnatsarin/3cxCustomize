@@ -1,4 +1,6 @@
-
+<?php 
+   include('session/session.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +50,6 @@
                         <div class="input-group">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" name= "search" id="search" class="form-control" placeholder="Type here...">
-                        <input type="submit" class="input-group-text btn-danger" value="search"><i class="bi bi-search me-2"></i></input>
                         </div>
                     </div>
                 </form>
@@ -110,7 +111,7 @@
                 <div class="col-lg-10 mb-lg-0 mb-4">
                     <div class="card z-index-2">
                         <div class="card-body p-3">
-                            <h6>Garph </h6>
+                            <h6>graph</h6>
                         </div>
                         <div class="card-body p-3">
                             <div class="chart">

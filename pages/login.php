@@ -15,8 +15,10 @@ if(pg_num_rows($result) != 0){
   $_SESSION['user_id'] = $row['user_id'];
   if($row['role']== "admin"){
     $_SESSION['is_admin'] = 1;
+  }elseif($row['role']== "user"){
+    $_SESSION['is_user'] = 1;
   }
-  
+
   header("Location:callsatisfaction.php");
   // echo $row['username'].$row['password'].$row['role'].$row['status'];
 }else{

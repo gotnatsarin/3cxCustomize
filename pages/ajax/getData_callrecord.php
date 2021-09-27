@@ -8,6 +8,8 @@
     OR CAST(end_time AS TEXT) LIKE '%".$search."%'
     ");
   $count =1;
+$start_time;
+
   while($row = pg_fetch_assoc($result)){
     echo "<tr>
               <td class='align-middle text-center text-sm'>

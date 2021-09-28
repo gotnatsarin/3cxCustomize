@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/3cxcustom.png">
   <title>
-    3CX Customize Add User
+    3CX Customize Profile
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -38,47 +38,44 @@
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
-              <div class="col-3"></div>
-                <div class="col-6 center">
+                <div class="col-12">
+
+                <!-- Add user -->
+                  
+                <a href="form_adduser.php"><button class="btn btn-primary" type="submit">Add User</button></a>
+
+                 <!--End add user -->
+
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h5>Add User</h5>
+                            <h6>Detail</h6>
                         </div>
-                          <div class="card-body px-0 pt-0 pb-2">
+                        <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
-                                <div class="card-body">
-                                  <form role="form">
-                                    <label>ชื่อ</label>
-                                    <div class="mb-3">
-                                      <input type="text" class="form-control" placeholder="ชื่อ" aria-label="name" aria-describedby="email-addon">
-                                    </div>
-                                    <label>นามสกุล</label>
-                                    <div class="mb-3">
-                                      <input type="text" class="form-control" placeholder="นามสกุล" aria-label="text" aria-describedby="password-addon">
-                                    </div>
-                                    <label>Username</label>
-                                    <div class="mb-3">
-                                      <input type="Username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="email-addon">
-                                    </div>
-                                    <label>Password</label>
-                                    <div class="mb-3">
-                                      <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
-                                    </div>
-                                    <label>Status</label>
-                                    <div class="mb-3">
-                                      <select class="form-select" aria-label="Default select example" id="cars">
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
-                                      </select>
-                                    </div>
-                                    <div class="d-grid gap-6 d-md-block">
-                                        <button class="btn btn-primary btn-lg me-md-2" type="button">Submit</button>
-                                        <a href="../pages/user.php"><button class="btn btn-danger btn-lg" type="button">Back</button></a>
-                                      </div>
-                                  </form>
-                                </div>
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center  text-xs font-weight-bold mb-0 opacity-10">#</th>
+                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">ชื่อ</th>
+                                            <th class="text-center  text-xs font-weight-bold mb-0 opacity-10 ps-2">นามสกุล</th>
+                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Username</th>                                            
+                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Status</th>
+                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td align="center">1</td>
+                                                <td align="center">Panupong</td>
+                                                <td align="center">Pumpothong</td>
+                                                <td align="center">Panupong</td>
+                                                <td align="center">admin</td>
+                                                <td align="center"><a href="form_edituser.php" class="bi bi-pencil-square"></a> | <i class="bi bi-archive-fill"></i></td>
+                                            </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>

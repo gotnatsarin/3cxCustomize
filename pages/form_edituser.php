@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/3cxcustom.png">
   <title>
-    3CX Customize Add User
+    3CX Customize Edit User
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -42,7 +42,7 @@
                 <div class="col-6 center">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h5>Add User</h5>
+                            <h5>Edit User</h5>
                         </div>
                           <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">

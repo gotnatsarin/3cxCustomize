@@ -169,9 +169,11 @@ require_once('session/session.php');
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
 
-
-        <!--        <li class="nav-item">
-                    <a class="nav-link  " href="../pages/profile.php">
+<?php 
+if(isset($_SESSION['is_admin'])){
+?>
+                 <li class="nav-item">
+                    <a class="nav-link  " href="../pages/user.php">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
@@ -188,13 +190,13 @@ require_once('session/session.php');
                 </g>
               </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Profile</span>
+                        <span class="nav-link-text ms-1">User</span>
                     </a>
-                </li>  -->
-<?php 
-if(isset($_SESSION['is_admin'])){
-?>
-                <li class="nav-item">
+                </li> 
+
+<?php } ?>
+
+      <!--          <li class="nav-item">
                     <a class="nav-link  " href="form_adduser.php">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -213,8 +215,8 @@ if(isset($_SESSION['is_admin'])){
                         </div>
                         <span class="nav-link-text ms-1">Add user</span>
                     </a>
-                </li>
-                <?php } ?>
+                </li>  -->
+                
 
                 <li class="nav-item">
                     <a class="nav-link  " href="../pages/session/logout.php">

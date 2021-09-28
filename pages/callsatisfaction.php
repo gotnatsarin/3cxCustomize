@@ -31,7 +31,10 @@
         <?php include 'menu.php';?>
         </div>
     </aside>
+
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+
+
         <!-- Navbar -->
        <?php 
         include_once('navbar.php');
@@ -64,7 +67,7 @@
                                                 <td>2</td>
                                                 <td align="center">3</td>
                                                 <td align="center">4</td>
-                                                <td align="center">5></td>
+                                                <td align="center">5</td>
                                             </tr>
                                     </tbody>
                                 </table>

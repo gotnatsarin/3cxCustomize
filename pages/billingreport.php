@@ -22,19 +22,20 @@
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
-        <?php include 'menu.php';?>
+        <?php include 'component/menu.php'; ?>
         </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
         <!-- Navbar -->
         <?php
-          include_once('navbar.php');
+          include_once('component/navbar.php');
         ?>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
@@ -42,7 +43,6 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Detail</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -73,7 +73,7 @@
                 <div class="col-lg-10 mb-lg-0 mb-4">
                     <div class="card z-index-2">
                         <div class="card-body p-3">
-                            <h6>Garph </h6>
+                            <h6>Graph</h6>
                         </div>
                         <div class="card-body p-3">
                             <div class="chart">
@@ -302,7 +302,7 @@
                 </div>
             </div>
             <?php 
-                include 'footer.php'
+                include 'component/footer.php'
             ?>
         </div> <br>
     </main>
@@ -425,6 +425,26 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
+
+
+        $("#search").keyup(function() {
+      $.ajax({
+          type: 'GET',
+          url: 'ajax/test_data.php',
+          data: {
+            // search: $("#search").val(),
+          },
+          success: function(data) {
+            var res = JSON.parse(data);
+            try{
+              console.log(res[$("#search").val()]['user']);
+            }catch{
+              console.log("Can't find id");
+            }
+          }
+        })
+      });
+
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

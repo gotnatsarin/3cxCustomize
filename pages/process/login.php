@@ -1,5 +1,5 @@
 <?php 
-include('connect.php');
+include('../connect.php');
 session_start();
 $username = pg_escape_string($conn,$_POST['username']);
 $password = pg_escape_string($conn,$_POST['password']);
@@ -19,10 +19,10 @@ if(pg_num_rows($result) != 0){
     $_SESSION['is_user'] = 1;
   }
 
-  header("Location:callsatisfaction.php");
-  // echo $row['username'].$row['password'].$row['role'].$row['status'];
+  header("Location:../callsatisfaction.php");
+  echo $row['username'].$row['password'].$row['role'].$row['status'];
 }else{
-  echo "Can't find";
+  header("Location:../index.php?error=112");
 }
 
 ?>

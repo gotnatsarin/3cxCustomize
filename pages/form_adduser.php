@@ -27,65 +27,70 @@
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
-        <?php include 'menu.php';?>
+        <?php include 'component/menu.php';?>
         </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-        <!-- Navbar -->
-       <?php 
-        include_once('navbar.php');
-       ?>
-        <!-- End Navbar -->
-        <div class="container-fluid py-4">
-            <div class="row">
-              <div class="col-3"></div>
-                <div class="col-6 center">
-                    <div class="card mb-4">
-                        <div class="card-header pb-0">
-                            <h5>Add User</h5>
-                        </div>
-                          <div class="card-body px-0 pt-0 pb-2">
-                            <div class="table-responsive p-0">
-                                <div class="card-body">
-                                  <form role="form">
-                                    <label>ชื่อ</label>
-                                    <div class="mb-3">
-                                      <input type="text" class="form-control" placeholder="ชื่อ" aria-label="name" aria-describedby="email-addon">
-                                    </div>
-                                    <label>นามสกุล</label>
-                                    <div class="mb-3">
-                                      <input type="text" class="form-control" placeholder="นามสกุล" aria-label="text" aria-describedby="password-addon">
-                                    </div>
-                                    <label>Username</label>
-                                    <div class="mb-3">
-                                      <input type="Username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="email-addon">
-                                    </div>
-                                    <label>Password</label>
-                                    <div class="mb-3">
-                                      <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
-                                    </div>
-                                    <label>Status</label>
-                                    <div class="mb-3">
-                                      <select class="form-select" aria-label="Default select example" id="cars">
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
-                                      </select>
-                                    </div>
-                                    <div class="d-grid gap-6 d-md-block">
-                                        <button class="btn btn-primary btn-lg me-md-2" type="button">Submit</button>
-                                        <a href="../pages/user.php"><button class="btn btn-danger btn-lg" type="button">Back</button></a>
-                                      </div>
-                                  </form>
-                                </div>
-                            </div>
-                          </div>
-                    </div>
-                </div>
+      <!-- Navbar -->
+      <?php 
+      include_once('component/navbar.php');
+      ?>
+      <!-- End Navbar -->
+      <div class="container-fluid py-4">
+          <div class="row">
+            <div class="col-3">
             </div>
-            
-            <?php 
-              include 'footer.php';
-            ?>
+              <div class="col-4 center">
+                  <div class="card mb-4">
+                      <div class="card-header pb-0">
+                          <h5>Add User</h5>
+                      </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                          <div class="table-responsive p-0">
+                              <div class="card-body">
+                                <form action="process/adduser.php" method="POST">
+                                <label>Username</label>
+                                  <div class="mb-3">
+                                    <input type="Username" class="form-control" placeholder="Username" aria-label="Username" required name="username" aria-describedby="email-addon">
+                                  </div>
+                                  <label>Firstname</label>
+                                  <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Firstname" aria-label="name" name="firstname" required aria-describedby="email-addon">
+                                  </div>
+                                  <label>Lastname</label>
+                                  <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Lastname" aria-label="text" name="lastname" required aria-describedby="password-addon">
+                                  </div>
+                                  <label>Password</label>
+                                  <div class="mb-3">
+                                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" required name="password" aria-describedby="password-addon">
+                                  </div>
+                                  <label>Email</label>
+                                  <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Email" aria-label="email" name="email" required aria-describedby="emailHelp">
+                                  </div>
+                                  <label>Role</label>
+                                  <div class="mb-3">
+                                    <select required class="form-select" aria-label="Default select example" name="role" id="role">
+                                      <option value="admin">Admin</option>
+                                      <option value="user">User</option>
+                                    </select>
+                                  </div>
+                                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                      <button onclick="javascript:location.href='../pages/user.php'" class="btn btn-danger btn-md" type="button">Back</button>
+                                      <button class="btn btn-primary btn-md me-md-2" type="submit">Submit</button>
+                                  </div>
+                                </form>
+                              </div>
+                          </div>
+                        </div>
+                  </div>
+              </div>
+          </div>
+          
+          <?php 
+            include 'component/footer.php';
+          ?>
         </div> <br>
     </main>
      <!--   Core JS Files   -->
@@ -94,13 +99,13 @@
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+      var win = navigator.platform.indexOf('Win') > -1;
+      if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+          damping: '0.5'
         }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+      }
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

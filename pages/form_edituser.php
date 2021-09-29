@@ -1,4 +1,16 @@
+<?php 
+include('connect.php');
+$id = $_GET['id'];
+$result = pg_query($conn, "SELECT * FROM public.access_user 
+WHERE user_id = $id");
 
+$row = pg_fetch_assoc($result);
+
+echo $row['firstname'];
+
+
+var_dump($row);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,34 +39,34 @@
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
-        <?php include 'menu.php';?>
+        <?php include 'component/menu.php';?>
         </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
         <!-- Navbar -->
        <?php 
-        include_once('navbar.php');
+        include_once('component/navbar.php');
        ?>
         <!-- End Navbar -->
-        <div class="container-fluid py-4">
+        <div class="container-fluid py-4"></div>
             <div class="row">
               <div class="col-3"></div>
                 <div class="col-6 center">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h5>Edit User</h5>
+                            <h5>Edit Users</h5>
                         </div>
                           <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <div class="card-body">
-                                  <form role="form">
-                                    <label>ชื่อ</label>
+                                  <form action="form">
+                                    <label>Firstname</label>
                                     <div class="mb-3">
-                                      <input type="text" class="form-control" placeholder="ชื่อ" aria-label="name" aria-describedby="email-addon">
+                                      <input type="text" class="form-control" placeholder="Firstname" value="<?php echo $row['firstname'] ?>" name="firstname" aria-label="name" aria-describedby="email-addon">
                                     </div>
-                                    <label>นามสกุล</label>
+                                    <label>Lastname</label>
                                     <div class="mb-3">
-                                      <input type="text" class="form-control" placeholder="นามสกุล" aria-label="text" aria-describedby="password-addon">
+                                      <input type="text" class="form-control" placeholder="Lastname" aria-label="text" aria-describedby="password-addon">
                                     </div>
                                     <label>Username</label>
                                     <div class="mb-3">
@@ -64,6 +76,10 @@
                                     <div class="mb-3">
                                       <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
                                     </div>
+                                    <label>Email</label>
+                                    <div class="mb-3">
+                                      <input type="email" class="form-control" placeholder="Email" aria-label="email" aria-describedby="email-addon">
+                                    </div>
                                     <label>Status</label>
                                     <div class="mb-3">
                                       <select class="form-select" aria-label="Default select example" id="cars">
@@ -72,8 +88,8 @@
                                       </select>
                                     </div>
                                     <div class="d-grid gap-6 d-md-block">
-                                        <button class="btn btn-primary btn-lg me-md-2" type="button">Submit</button>
                                         <a href="../pages/user.php"><button class="btn btn-danger btn-lg" type="button">Back</button></a>
+                                        <button class="btn btn-primary btn-lg me-md-2" type="button">Submit</button>
                                       </div>
                                   </form>
                                 </div>
@@ -84,10 +100,13 @@
             </div>
             
             <?php 
-              include 'footer.php';
+            pg_free_result($result);
+            pg_close($conn);
+              include 'component/footer.php';
             ?>
         </div> <br>
     </main>
+
      <!--   Core JS Files   -->
      <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>

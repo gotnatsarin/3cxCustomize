@@ -1,12 +1,30 @@
  <!-- Navbar -->
+ <?php
+
+function checkUrl(){
+  $url = substr($_SERVER['SCRIPT_NAME'],20);
+  if($url == 'callsatisfaction.php')
+  echo "Call Satisfaction";
+  if($url == 'callrecorderreport.php')
+  echo "Call Recorder Report";
+  if($url == 'billingreport.php')
+  echo "Billing Report";
+  if($url == 'user.php')
+  echo "Users";
+  if($url == 'form_adduser.php')
+  echo "Add User";
+}
+
+ 
+?>
  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
             <div class="container-fluid py-1 px-3">
               <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm text-dark active"">Pages</li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Call Recorder Report</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><?php checkUrl();?></li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Call Recorder Report</h6>
+                    <h6 class="font-weight-bolder mb-0"> <?php checkUrl(); ?></h6>
                 </nav>
 
                 

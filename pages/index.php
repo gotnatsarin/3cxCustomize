@@ -25,9 +25,17 @@ if(isset($_SESSION['is_admin'])){
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <!-- Sweet alert2 -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="">
+ <?php
+ if (isset($_GET['error'])) {
+  echo "<script> Swal.fire('Username or Password is incorrect!!','Please try again.','error')</script>";
+}
+?>
   <main class="main-content  mt-0">
     <section>
       <div class="page-header min-vh-75">
@@ -40,23 +48,25 @@ if(isset($_SESSION['is_admin'])){
                   <p class="mb-0">Enter your Username and password</p>
                 </div>
                 <div class="card-body">
-                  <form role="form" action="login.php" method="POST">
-                    <label>Username</label>
+                  <form role="form" action="process/login.php" method="POST">
+                    <label><i class="bi bi-person-fill"></i> : Username</label>
                     <div class="mb-3">
-                      <input type="text" class="form-control" name="username" id="username" placeholder="Username" aria-label="Username" aria-describedby="email-addon">
+                    <input type="text" class="form-control" name="username" id="username" required placeholder="Username" aria-label="Username" aria-describedby="email-addon">
                     </div>
-                    <label>Password</label>
+                    <label><i class="bi bi-key-fill"></i> : Password</label>
                     <div class="mb-3">
-                      <input type="password" class="form-control" name="password" id="password" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                      <input type="password" class="form-control" name="password" id="password" required placeholder="Password" aria-label="Password" aria-describedby="password-addon">
                     </div>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" checked="">
                       <label class="form-check-label" for="rememberMe">Remember me</label>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                      <a href="#">Forgot Password ?</a>
                     </div>
                     <div class="text-center">
                       <!-- <button id="btnsubmit" type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign In</button> -->
                       <input type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" value="Sign In">
-                    </div>
+                    </div>  
                   </form>
                 </div>
               </div>

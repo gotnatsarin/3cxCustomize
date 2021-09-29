@@ -40,7 +40,7 @@
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
-        <?php include 'menu.php';?>
+        <?php include 'component/menu.php';?>
         </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
@@ -80,7 +80,6 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Detail</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -579,7 +578,7 @@
                 </div>
             </div>
             <?php 
-                include 'footer.php'
+                include 'component/footer.php'
             ?>
         </div> <br>
     </main>

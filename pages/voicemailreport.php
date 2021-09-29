@@ -40,7 +40,7 @@
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
-        <?php include 'menu.php';?>
+        <?php include 'component/menu.php';?>
         </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
@@ -579,7 +579,7 @@
                 </div>
             </div>
             <?php 
-                include 'footer.php'
+                include 'component/footer.php'
             ?>
         </div> <br>
     </main>

@@ -2,10 +2,14 @@
   include('../connect.php');
   $search = $_GET['search'];
   $result = pg_query($conn, "SELECT * FROM access_user 
-    WHERE firstname LIKE '%".$search."%'
-    OR lastname LIKE '%".$search."%'
-    OR email LIKE '%".$search."%'
-    OR role LIKE '%".$search."%'
+    WHERE 
+    (
+      firstname LIKE '%".$search."%'
+      OR lastname LIKE '%".$search."%'
+      OR email LIKE '%".$search."%'
+      OR role LIKE '%".$search."%'
+    )
+    AND status != 'inactive'
     ORDER BY role, firstname
     ");
   $count =1;
@@ -46,7 +50,7 @@ $select = ['',''];
           </td>
           <td>
             <div align='center'><a data-bs-toggle='modal' data-bs-target='#exampleModal".$row['user_id']."' class='bi bi-pencil-square'> </a> 
-              || <a href='delete_user.php?id=".$row['user_id']."' > <i class='bi bi-archive-fill'></i></a>
+              || <a href='javascript:deleteClick(".$row['user_id'].");' > <i class='bi bi-archive-fill ' id='".$row['user_id']."' ></i></a>
             </div>
               <div class='modal fade' id='exampleModal".$row['user_id']."' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
               <div class='modal-dialog'>
@@ -57,7 +61,7 @@ $select = ['',''];
                   </div>
                   <form method='POST' action='process/edituser.php'>
                   <div class='modal-body'>
-                    <input id='user_id' name='user_id' value='".$row['user_id']."' type='hidden'>
+                    <input id='user_id".$row['user_id']."' name='user_id' value='".$row['user_id']."' type='hidden'>
                     <label>Username</label>
                       <div class='mb-3'>
                         <input type='text' disabled class='form-control' placeholder='Username' value='".$row['username']."' id='username' aria-label='Username' aria-describedby='email-addon'>

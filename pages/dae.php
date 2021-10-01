@@ -1,4 +1,9 @@
 <?php 
-echo substr($_SERVER['SCRIPT_NAME'],20);
+
+$salt = '3CX_DEV_TEAM';
+
+$hash_password = hash_hmac('sha256', '1234', $salt);
+
+echo $hash_password ;
 
 ?>

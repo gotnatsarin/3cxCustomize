@@ -9,7 +9,7 @@ $email = trim($_POST['email']);
 $firstname = trim($_POST['firstname']);
 $lastname = trim($_POST['lastname']);
 
-$salt = 'adsldkklsdhf';
+$salt = '3CX_DEV_TEAM';
 $hash_password = hash_hmac('sha256', $password, $salt);
 $lastID = pg_fetch_assoc(pg_query($conn,"SELECT user_id FROM public.access_user ORDER BY user_id DESC LIMIT 1"));
 $lastID = $lastID['user_id']+1;

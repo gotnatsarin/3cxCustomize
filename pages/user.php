@@ -41,45 +41,92 @@
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-12">
+              <div class="col-12">
 
                 <!-- Add user -->
 
-                <a href="form_adduser.php"><button class="btn btn-primary" type="submit"><i class="bi bi-plus-circle fa-lg"></i> &nbsp;  Add User</button></a>
-
+                <button class="btn btn-primary" data-bs-toggle='modal' data-bs-target='#exampleModal' type="submit"><i class="bi bi-plus-circle fa-lg"></i> &nbsp;  Add User</button>
                  <!--End add user -->
 
-                    <div class="card mb-4">
-                        <div class="card-header pb-0">
-                        </div> 
-                        <div class="card-body px-0 pt-0 pb-2">
-                            <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center text-xs font-weight-bold mb-0 opacity-10">#</th>
-                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Firstname</th>
-                                            <th class="text-center text-uppercase text-xs font-weight-bold mb-0 opacity-10 ps-2">Lastname</th>
-                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Email</th>                                            
-                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Status</th>
-                                            <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="output" >
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+            </div> 
+              <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-center text-xs font-weight-bold mb-0 opacity-10">#</th>
+                                <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Firstname</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bold mb-0 opacity-10 ps-2">Lastname</th>
+                                <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Email</th>                                            
+                                <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Status</th>
+                                <th class="text-center text-uppercase  text-xs font-weight-bold mb-0 opacity-10 ps-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="output" >
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        </tbody>
+                      </table>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-
 
             <?php 
               include 'component/footer.php';
             ?>
-        </div> <br>
+        </div>
+        <br>
+
+        
+  <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+    <div class='modal-dialog'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <h5 class='modal-title' id='exampleModalLabel'>Edit User</h5>
+          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+        </div>
+        <form method='POST' action='process/adduser.php'>
+          <div class='modal-body'>
+            <label>Username</label>
+            <div class="mb-3">
+              <input type="Username" class="form-control" placeholder="Username" aria-label="Username" required name="username" aria-describedby="email-addon">
+            </div>
+            <label>Firstname</label>
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Firstname" aria-label="name" name="firstname" required aria-describedby="email-addon">
+            </div>
+            <label>Lastname</label>
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Lastname" aria-label="text" name="lastname" required aria-describedby="password-addon">
+            </div>
+            <label>Password</label>
+            <div class="mb-3">
+              <input type="password" class="form-control" placeholder="Password" aria-label="Password" required name="password" aria-describedby="password-addon">
+            </div>
+            <label>Email</label>
+            <div class="mb-3">
+              <input type="email" class="form-control" placeholder="Email" aria-label="email" name="email" required aria-describedby="emailHelp">
+            </div>
+            <label>Role</label>
+            <div class="mb-3">
+              <select required class="form-select" aria-label="Default select example" name="role" id="role">
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+            </div>
+            <div class='modal-footer'>
+              <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+              <button type='submit' id='save' class='btn btn-primary'>Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
     </main>
 
      <!--   Core JS Files   -->
@@ -96,8 +143,8 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
 
-        $(document).ready(function() {
-      $.ajax({
+      $(document).ready(function() {
+        $.ajax({
           type: 'GET',
           url: 'ajax/getData_user.php',
           data: {
@@ -105,6 +152,22 @@
           },
           success: function(data) {
             $("#output").html(data)
+
+            const insertElement = (data) => {
+
+            }
+
+            // var table = document.getElementById("myTable");
+            // var row = table.insertRow();
+            // var cell1 = row.insertCell();
+            // var cell2 = row.insertCell();
+            // cell1.classList.add("testclass");
+            // cell2.classList.add("testclass");
+            // row.setAttribute("name","Test");
+            // row.setAttribute("id","Okay");
+            // cell1.innerHTML = "NEW CELL1";
+            // cell2.innerHTML = "NEW CELL2";
+
           }
         })
       });
@@ -121,28 +184,32 @@
           }
         })
       });
-
-      $("#save").click(function() {
-        var data = $(this).val('');
-        console.log(data)
+      
+      const deleteClick = (uid) => {
+      console.log(uid);
+      var status = confirm("Do you confirm to delete this user?")
+      if(status){
+        $.ajax({
+        url: "process/delete_user.php",
+        method: "POST",
+        data: {
+          id: uid
+        },
+        success: function(data) {
+         location.reload();
+        }
       });
+      }
 
-      // $("#save").click(function(this.value) {
-      //   $.ajax({
-      //     type: 'GET',
-      //     url: 'ajax/.php',
-      //     data: {
-      //       user_id: ,
-      //       firstname: ,
-      //       lastname: ,
-      //       username: ,
-      //       status: ,
-      //     },
-      //     success: function(data) {
-      //       $("#output").html(data)
-      //     }
-      //   })
-      // });
+      }
+
+    //   $('.delete_user').click(function(){
+    //   var uid = $(this).attr("id");
+    //   console.log(uid);
+    //   var status = confirm("Do you confirm to delete?")
+
+
+    // });
       
     </script>
     <!-- Github buttons -->

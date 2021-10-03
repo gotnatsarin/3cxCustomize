@@ -144,6 +144,7 @@
         }
 
       $(document).ready(function() {
+
         $.ajax({
           type: 'GET',
           url: 'ajax/getData_user.php',

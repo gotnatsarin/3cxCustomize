@@ -1,14 +1,24 @@
 <?php
   include('../connect.php');
   $search = $_GET['search'];
+   
+  $perpage = 10;
+  if(isset($_GET['page'])){
+    $page = $_GET['page'];
+  } else {
+    $page = 1;
+  }
+
+  $startpage = ($page - 1) * $perpage;
+
   $result = pg_query($conn, "SELECT * FROM recordings 
     WHERE recording_url LIKE '%".$search."%' 
     OR CAST(cl_participants_id AS TEXT) LIKE '%".$search."%'
     OR CAST(start_time AS TEXT) LIKE '%".$search."%'
     OR CAST(end_time AS TEXT) LIKE '%".$search."%'
-    ");
+    ORDER BY cl_participants_id LIMIT $perpage OFFSET $startpage ");
+    
   $count =1;
-$start_time;
 
   while($row = pg_fetch_assoc($result)){
     echo "<tr>

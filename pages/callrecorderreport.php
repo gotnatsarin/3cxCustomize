@@ -1,6 +1,12 @@
 <?php
 include('session/session.php');
+include('connect.php');
+$result1 = pg_query($conn, "SELECT * FROM recordings");
+$num_rows = pg_num_rows($result1); 
+$num_pages = ceil($num_rows / 10);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,6 +110,27 @@ include('session/session.php');
                     </div>
                 </div>
             </div>
+            <input type="hidden" id="keeppage" />
+            <input type="hidden" id="lastpage" value="<?php echo $num_pages; ?>" />
+            <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li id="previous" class="page-item">
+                <a class="page-link" href="#" aria-label="Previous" onclick="javascript:selectpage(parseInt($('#keeppage').val())-1);">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <?php for ($i = 1; $i <= $num_pages; $i++) { ?>
+              <li class="page-item"><a class="page-link" onclick="javascript:selectpage(<?php echo $i; ?>);" id="page" href="#"><?php echo $i; ?></a></li>
+              <?php } ?>
+              <li id="next" class="page-item" >
+                <a class="page-link" href="#" aria-label="Next" onclick="javascript:selectpage(parseInt($('#keeppage').val())+1);">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+
             <div class="row mt-5">
             <div class="col-lg-1"></div>
                 <div class="col-lg-10 mb-lg-0 mb-4">
@@ -126,13 +153,15 @@ include('session/session.php');
                     </div>
                 </div>
             </div>
+            
+
             <?php 
                 include 'component/footer.php'
             ?>
         </div> <br>
     </main>
      <!--   Core JS Files   -->
-     <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
@@ -251,6 +280,8 @@ include('session/session.php');
         }
 
     $(document).ready(function() {
+      $('#keeppage').val("1");
+      $('#previous').addClass("disabled");
       $.ajax({
           type: 'GET',
           url: 'ajax/getData_callrecord.php',
@@ -262,6 +293,39 @@ include('session/session.php');
           }
         })
       });
+
+      const selectpage = (page) => {
+        $('#keeppage').val(page);
+        if(page == 1){
+          $('#previous').addClass("disabled");
+          $('#next').removeClass("disabled");
+        }else if(page == $('#lastpage').val()){
+          $('#next').addClass("disabled");
+          $('#previous').removeClass("disabled");
+        }else{
+          $('#previous').removeClass("disabled");
+          $('#next').removeClass("disabled");
+        }
+       
+        
+        $.ajax({
+          type: 'GET',
+          url: 'ajax/getData_callrecord.php',
+          data: {
+            page: page,
+          },
+          success: function(data) {
+            $("#output").html(data)
+            
+          }
+        })
+
+      }
+
+      // $("#page").onclick(function() {
+      //   var page = $(this).attr("value");
+
+      // });
 
       $("#search").keyup(function() {
         $.ajax({

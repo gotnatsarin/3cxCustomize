@@ -16,8 +16,9 @@
     OR CAST(cl_participants_id AS TEXT) LIKE '%".$search."%'
     OR CAST(start_time AS TEXT) LIKE '%".$search."%'
     OR CAST(end_time AS TEXT) LIKE '%".$search."%'
-    ORDER BY cl_participants_id LIMIT $perpage OFFSET $startpage ");
-    
+    ORDER BY cl_participants_id LIMIT $perpage OFFSET $startpage");
+    // $num_rows = pg_num_rows($result1);
+
   $count =1;
 
   while($row = pg_fetch_assoc($result)){
@@ -53,5 +54,7 @@
               $count+=1;
   }
   pg_free_result($result);
+  pg_free_result($result1);
   pg_close($conn);
+
 ?>

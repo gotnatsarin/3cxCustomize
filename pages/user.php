@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/3cxcustom.png">
   <title>
-    3CX Customize Profile
+    3CX Customize Users
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -35,7 +35,7 @@
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
         <!-- Navbar -->
-       <?php 
+       <?php
         include_once('component/navbar.php');
        ?>
         <!-- End Navbar -->
@@ -80,7 +80,6 @@
         </div>
         <br>
 
-        
   <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
     <div class='modal-dialog'>
       <div class='modal-content'>

@@ -120,7 +120,7 @@ $num_pages = ceil($num_rows / 10);
                 </a>
               </li>
               <?php for ($i = 1; $i <= $num_pages; $i++) { ?>
-              <li class="page-item"><a class="page-link" onclick="javascript:selectpage(<?php echo $i; ?>);" id="page" href="#"><?php echo $i; ?></a></li>
+              <li class="page-item" value="<?php echo $i; ?>" id="btn-page" ><a class="page-link" onclick="javascript:selectpage(<?php echo $i; ?>);" id="page" href="#"><?php echo $i; ?></a></li>
               <?php } ?>
               <li id="next" class="page-item" >
                 <a class="page-link" href="#" aria-label="Next" onclick="javascript:selectpage(parseInt($('#keeppage').val())+1);">
@@ -280,6 +280,7 @@ $num_pages = ceil($num_rows / 10);
         }
 
     $(document).ready(function() {
+      $('#btn-page').first().addClass("active")
       $('#keeppage').val("1");
       $('#previous').addClass("disabled");
       $.ajax({
@@ -295,6 +296,8 @@ $num_pages = ceil($num_rows / 10);
       });
 
       const selectpage = (page) => {
+        $('#btn-page.active').removeClass("active")
+        $('#btn-page[value="'+page+'"]').addClass("active")
         $('#keeppage').val(page);
         if(page == 1){
           $('#previous').addClass("disabled");
